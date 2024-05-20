@@ -21,11 +21,13 @@ public class EmbeddingClientConfig {
     private String modelResource = "onnx-transformers/model.onnx";
 
     @Bean
-    public TransformersEmbeddingClient onnxEmbeddingClient() {
+    public TransformersEmbeddingClient onnxEmbeddingClient() throws Exception {
         TransformersEmbeddingClient client = new TransformersEmbeddingClient();
         client.setTokenizerResource(this.getTokenizerResource());
         client.setModelResource(this.getModelResource());
+        client.setModelOutputName("token_embeddings");
         client.setDisableCaching(true);
+        client.afterPropertiesSet();
         return client;
     }
     
