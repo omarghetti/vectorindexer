@@ -1,3 +1,4 @@
+version: '3.5'
 services:
   qdrant:
     image: qdrant/qdrant:latest
@@ -14,9 +15,14 @@ services:
         target: /etc/qdrant/config.yml
     volumes:
       - ./qdrant_data:/var/lib/qdrant
-networks:
-  default:
-    name: vector-index-network
+  nats:
+    image: nats
+    ports:
+      - "8222:8222"
+      - "4222:4222"
+    expose:
+      - 4222
+    hostname: nats-server
     
 configs:
   qdrant_config:
