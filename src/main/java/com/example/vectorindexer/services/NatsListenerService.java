@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.ai.vectorstore.qdrant.QdrantVectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class NatsListenerService {
     
     @Autowired
-    private VectorStore vectorStore;
+    private QdrantVectorStore vectorStore;
 
     @Value("${nats.server.url}")
     private String natsServerUrl;
@@ -43,6 +44,5 @@ public class NatsListenerService {
         });
         natsDispatcher.subscribe(natsServerSubject);
     }
-
     
 }
